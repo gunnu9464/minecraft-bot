@@ -4,7 +4,7 @@ function createBot() {
   console.log('Attempting to connect...');
 
   const bot = mineflayer.createBot({
-    host: 'nerddddsmp.aternos.me',
+    host: 'Nerddddsmp.aternos.me',
     port: 57453, // Make sure this is the latest port
     username: 'Steve_' + Math.floor(Math.random() * 10000),
     version: false // Auto-detect version
