@@ -1,6 +1,8 @@
 
 const mineflayer = require('mineflayer');
+const express = require('express');
 
+// Create the Minecraft bot
 function createBot() {
   const bot = mineflayer.createBot({
     host: 'Nerddddsmp.aternos.me',
@@ -40,3 +42,9 @@ function createBot() {
 
 createBot();
 
+// Create minimal Express server for UptimeRobot
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (_, res) => res.send('Bot is alive!'));
+app.listen(port, () => console.log(`Web server running on port ${port}`));
