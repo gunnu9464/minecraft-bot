@@ -1,19 +1,21 @@
 const mineflayer = require('mineflayer');
-const express = require('express');
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Create bot
 function createBot() {
+  console.log('Attempting to connect...');
+
   const bot = mineflayer.createBot({
-    host: 'Nerddddsmp.aternos.me',
-    port: 25565, // your custom server port
-    username: 'Alex_' + Math.floor(Math.random() * 10000)
+    host: 'nerddddsmp.aternos.me',
+    port: 57453, // Make sure this is the latest port
+    username: 'Steve_' + Math.floor(Math.random() * 10000),
+    version: false // Auto-detect version
+  });
+
+  bot.on('login', () => {
+    console.log('✅ Bot logged in');
   });
 
   bot.on('spawn', () => {
-    console.log('Bot spawned!');
+    console.log('✅ Bot spawned!');
     setInterval(() => {
       bot.setControlState('forward', true);
       bot.setControlState('jump', true);
@@ -27,21 +29,16 @@ function createBot() {
   });
 
   bot.on('end', () => {
-    console.log('Bot disconnected. Reconnecting...');
-    setTimeout(createBot, 5000);
+    console.log('⚠️ Bot disconnected. Reconnecting in 10s...');
+    setTimeout(createBot, 10000);
   });
 
-  bot.on('error', err => console.log('Bot error:', err));
+  bot.on('error', (err) => {
+    console.log('❌ Bot error:', err.message);
+    setTimeout(createBot, 10000);
+  });
 }
 
 createBot();
 
-// Express server for UptimeRobot
-app.get('/', (req, res) => {
-  res.send('Bot is running!');
-});
-
-app.listen(PORT, () => {
-  console.log(`Express server started on port ${PORT}`);
-});
 
