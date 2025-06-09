@@ -1,44 +1,47 @@
-const mineflayer = require('mineflayer')
-const express = require('express')
+const mineflayer = require('mineflayer');
+const express = require('express');
 
-let bot
+const app = express();
+const PORT = process.env.PORT || 3000;
 
+// Create bot
 function createBot() {
-  bot = mineflayer.createBot({
+  const bot = mineflayer.createBot({
     host: 'nerddddsmp.aternos.me',
-    port: 25565,
-    username: 'Realistic_' + Math.floor(Math.random() * 10000),
-    version: '1.16.5' // Change if needed
-  })
+    port: 57453, // your custom server port
+    username: 'Alex_' + Math.floor(Math.random() * 10000)
+  });
 
   bot.on('spawn', () => {
-    console.log('Bot spawned!')
-
-    // Repeating actions
+    console.log('Bot spawned!');
     setInterval(() => {
-      bot.setControlState('sneak', true)
-      bot.setControlState('jump', true)
-      bot.setControlState('forward', true)
+      bot.setControlState('forward', true);
+      bot.setControlState('jump', true);
+      bot.setControlState('sneak', true);
       setTimeout(() => {
-        bot.setControlState('jump', false)
-        bot.setControlState('forward', false)
-      }, 2000)
-    }, 5000)
-  })
+        bot.setControlState('forward', false);
+        bot.setControlState('jump', false);
+        bot.setControlState('sneak', false);
+      }, 3000);
+    }, 10000);
+  });
 
   bot.on('end', () => {
-    console.log('Bot disconnected. Reconnecting in 10s...')
-    setTimeout(createBot, 10000)
-  })
+    console.log('Bot disconnected. Reconnecting...');
+    setTimeout(createBot, 5000);
+  });
 
-  bot.on('error', (err) => {
-    console.log('Bot error:', err)
-  })
+  bot.on('error', err => console.log('Bot error:', err));
 }
 
-createBot()
+createBot();
 
-// Web server for UptimeRobot
-const app = express()
-app.get('/', (req, res) => res.send('Bot is running!'))
-app.listen(3000, () => console.log('Express server started on port 3000'))
+// Express server for UptimeRobot
+app.get('/', (req, res) => {
+  res.send('Bot is running!');
+});
+
+app.listen(PORT, () => {
+  console.log(`Express server started on port ${PORT}`);
+});
+
