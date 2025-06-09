@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 // Create bot
 function createBot() {
   const bot = mineflayer.createBot({
-    host: 'nerddddsmp.aternos.me',
+    host: 'Nerddddsmp.aternos.me',
     port: 25565, // your custom server port
     username: 'Alex_' + Math.floor(Math.random() * 10000)
   });
