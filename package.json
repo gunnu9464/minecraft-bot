@@ -1,6 +1,7 @@
 {
-  "name": "minecraft-bot",
+  "name": "minecraft-bot-uptime",
   "version": "1.0.0",
+  "description": "A Minecraft bot that stays online with Mineflayer and Express",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -9,7 +10,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "mineflayer": "4.1.0"
+    "mineflayer": "4.1.0",
+    "express": "4.16.4"
   }
 }
