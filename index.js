@@ -6,9 +6,8 @@ const port = process.env.PORT || 3000;
 function createBot() {
   const bot = mineflayer.createBot({
     host: 'Nerddddsmp.aternos.me',
-    port: 57453,
-    username: 'Player_' + Math.floor(Math.random() * 10000),
-    version: false
+    username: 'Steve_' + Math.floor(Math.random() * 10000),
+    version: false // Auto-detect version
   });
 
   bot.on('spawn', () => {
@@ -18,15 +17,13 @@ function createBot() {
       bot.setControlState('jump', true);
       bot.setControlState('sneak', true);
       setTimeout(() => {
-        bot.setControlState('forward', false);
-        bot.setControlState('jump', false);
-        bot.setControlState('sneak', false);
+        bot.clearControlStates();
       }, 3000);
     }, 10000);
   });
 
   bot.on('end', () => {
-    console.log('🔁 Bot disconnected, reconnecting...');
+    console.log('🔁 Bot disconnected. Reconnecting in 10s...');
     setTimeout(createBot, 10000);
   });
 
@@ -38,9 +35,9 @@ function createBot() {
 createBot();
 
 app.get('/', (req, res) => {
-  res.send('Bot is running!');
+  res.send('🟢 Bot is online and running.');
 });
 
 app.listen(port, () => {
-  console.log(`🌐 Web server running on port ${port}`);
+  console.log(`🌐 Web server listening on port ${port}`);
 });
