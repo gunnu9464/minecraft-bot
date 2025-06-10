@@ -1,16 +1,15 @@
 {
-  "name": "minecraft-bot-uptime",
+  "name": "aternos-bot",
   "version": "1.0.0",
-  "description": "A Minecraft bot that stays online with Mineflayer and Express",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "engines": {
-    "node": ">=14"
-  },
   "dependencies": {
     "mineflayer": "4.1.0",
-    "express": "4.16.4"
+    "express": "^4.16.4"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
